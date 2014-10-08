@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+    <head>
+        <title>social-comments - index</title>
+        <style type='text/css'>
+            html, body {
+                margin: 0;
+                height: 100%;
+                width: 100%;
+                font-size: 14px;
+            }
+            
+            *{
+                box-sizing: border-box;
+            }
+            
+            asside {
+                /*position: fixed;*/
+                float: left;
+                width: 300px;
+                background: #d6d6d6;
+                z-index: 3;
+                font-family: sans-serif, verdana, tahoma;
+                padding-left: 5px;
+                height: 100%;
+                overflow: auto;
+                font-size: 0.8rem;
+                box-shadow: 0 0 80px #333;
+            }
+            
+            asside p {
+                border-bottom: dashed 1px #999  ;
+                margin: 0 10px 0 0;
+            }
+            
+            asside label {
+                display: block;
+                margin: 10px 0;
+            }
+            
+            asside a {
+                color: #333;
+                text-decoration: none;
+                padding: 5px;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+            asside a:hover {
+                text-decoration: underline;
+            }
+            
+            asside pre {
+                border: solid 1px #ccc;
+                background: #f0f0f0;
+                margin-right: 5px;
+                padding: 5px;
+                overflow: auto;
+            }
+            
+            #previewer {
+                height: 100%;
+                margin-left: 300px;
+                z-index: 1;
+            }
+                    
+            #previewer-iframe {
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            
+            .wrapper {
+                width: 100%;
+                height: 100%;
+                display: block;
+                position: relative;
+            }
+        </style>
+    </head>
+    <body>
+        <div class='wrapper'>
+            <asside id='project-data'>
+                <h1>social-comments: 1.0.0</h1>
+                <p>app para a utilizaçao da ferramenta disqus</p>
+                <label>
+                API Docs: <a href='http://github.tpn.terra.com/pages/terra/social-comments' target='previewer-iframe' title='http://github.tpn.terra.com/pages/terra/social-comments' class='inside'>PRD</a> / <a href='./docs/' target='previewer-iframe' class='inside'>DSV</a>
+                </label>
+                <label>
+                    Github: <a href='http://github.tpn.terra.com/Terra/social-comments' target='previewer-iframe' title='http://github.tpn.terra.com/Terra/social-comments' class='inside'>Source</a> / <a href='http://github.tpn.terra.com/Terra/social-comments/issues' target='previewer-iframe' title='http://github.tpn.terra.com/Terra/social-comments/issues' class='inside'>Issues</a>
+                </label>
+                <label>
+                    Unit Tests: 
+                    <a href='http://s1.trrsf.com/fe/social-comments/tests/index.htm?zaz[env]=tests' target='previewer-iframe' title='http://s1.trrsf.com/fe/social-comments/tests/index.htm?zaz[env]=tests' class='inside'>PRD</a> / 
+                    <a href='./tests/index.htm?zaz[env]=tests' target='previewer-iframe' class='inside'>DSV</a>
+                </label>
+                <label>
+                    Examples: <a href='./samples/' target='previewer-iframe' class='inside'>Samples</a>
+                </label>
+                <span>
+                    <strong>Development cycle:</strong><br/><br/>
+                    - While developing
+                    <pre>
+$ grunt watch</pre>
+                    - To run your development working<br/>
+                    Use one of the links above(for unit tests of samples)<br/>
+                    - To create a new branch
+                    <pre>
+$ git checkout -b <em>branchName</em></pre>
+                    - To keep up to date
+                    <pre>
+$ git checkout master
+$ git pull terra master
+$ git checkout <em>branchName</em>
+$ git merge master</pre>
+                    - To commit
+                    <pre>
+$ git add -A
+$ git commit -am <em>"[+] your commit message"</em></pre>
+                    - To push
+                    <pre>
+$ git push mine <em>branchName/</em></pre>
+                    - To put it in <b>HLG</b><br/>
+                    <pre>
+$ git push mine <em>branchName</em>
+$ zaz_publish_hlg</pre>
+                    Then check it at
+                    <pre>[user].[repository].[branch].hlg-fe.tpn.terra.com/</pre>
+                    - To see files in PREVIEW<br/>
+                    [repository].preview-fe.terra.com/<br/>
+                    Go to <a href='http://github.tpn.terra.com/Terra/social-comments'>http://github.tpn.terra.com/Terra/social-comments</a> and open a <strong>pull request</strong><br/>
+                    - Load it from PREV in PROD:<br/>
+                    <a href='http://terra.com.br/?tpn=1&component=social-comments&social-comments[env]=prev'>here</a>
+                    - See it in PROD:<br/>
+                    <a href='s1.trrsf.com/fe/[repository]'>here</a>
+                </span>
+            </asside>
+            <div id='previewer'>
+                <iframe name='previewer-iframe' id='previewer-iframe'></iframe>
+            </div>
+        </div>
+    </body>
+</html>
