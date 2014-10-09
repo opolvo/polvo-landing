@@ -96,7 +96,7 @@ zaz.use(function appSocialComments(pkg) {
                 var PUBLIC = this,
                     PRIVATE = {};
 
-                /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+                // jshint ignore:start
                 var disqus_shortname = 'terranetworks'; // required: replace example with your forum shortname
 
                 this.createEmbed = function (disqus_shortname) {
@@ -135,7 +135,7 @@ zaz.use(function appSocialComments(pkg) {
                 // it was in your expected property
                 this.createEmbed(disqus_shortname);
                 this.createCounter(disqus_shortname);
-
+                // jshint ignore:end
 
                 return PUBLIC;
 
