@@ -1,0 +1,15 @@
+# development variable directories
+node_modules/
+dist/
+
+# IDEs metadata
+.project
+nbproject
+sftp-config.json
+
+# temp files
+~*
+._*
+
+#sass
+.sass-cache
