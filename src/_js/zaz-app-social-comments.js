@@ -97,7 +97,7 @@ zaz.use(function appSocialComments(pkg) {
                     PRIVATE = {};
 
                 /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                var disqus_shortname = 'vbarbos'; // required: replace example with your forum shortname
+                //var disqus_shortname = 'vbarbos'; // required: replace example with your forum shortname
 
                 this.createEmbed = function (disqus_shortname) {
                     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
