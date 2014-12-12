@@ -61,12 +61,12 @@ zaz.use(function appSocialComments(pkg) {
                     'cl' : 'terracl',
                     'co' : 'terracol',
                     'pe' : 'terrape'
-                }
+                };
 
                 var shortName = disqusUsers[pkg.context.page.get("country")];
 
                 if(shortName){
-                    window['disqus_shortname'] = shortName;
+                    window['disqus_shortname'] = shortName; //jshint ignore:line
                    
                     var dsq = document.createElement('script');
                     dsq.type = 'text/javascript';
