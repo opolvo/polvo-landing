@@ -52,6 +52,9 @@ zaz.use(function appSocialComments(pkg) {
                 var PUBLIC = this,
                     PRIVATE = {};
 
+                PRIVATE.iframeSize = 600;
+                PRIVATE.enableResize = true;
+
                 var disqusUsers = {
                     'br' : 'terranetworks',
                     'es' : 'terraes',
@@ -73,13 +76,65 @@ zaz.use(function appSocialComments(pkg) {
                     dsq.async = true;
                     dsq.src = '//' + shortName + '.disqus.com/embed.js';
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-
-                    var s = document.createElement('script');
-                    s.async = true;
-                    s.type = 'text/javascript';
-                    s.src = 'http://' + shortName + '.disqus.com/count.js';
-                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(s);
                 }
+
+                PRIVATE.receiveMessage = function(event){
+                    if (event.origin === "http://disqus.com"){
+                        var objDisqus = JSON.parse(event.data);
+
+                        if(PRIVATE.enableResize && objDisqus.name === 'mainViewRendered' && objDisqus.data){
+                            PRIVATE.enableResize = false;
+
+                            if(objDisqus.data.height > PRIVATE.iframeSize){
+                                PRIVATE.showButton();
+                            }
+                        }else if(objDisqus.name === 'posts.count' && objDisqus.data){
+                            PRIVATE.setCountComments(objDisqus.data);
+                        }
+                    }
+                };
+
+                PRIVATE.setCountComments = function(countComments){
+                    var elements = document.querySelectorAll('a[href="#disqus_thread"]'),
+                        length = elements.length;
+
+                    if(typeof countComments === "object"){
+                        countComments = 0;
+                    }
+
+                    for(var i=0; i<length; i++){
+                        elements[i].innerHTML = countComments;
+                    }
+
+                };
+
+                PRIVATE.showButton = function(){
+                    var objDisqus = document.getElementById('disqus_thread');
+                    objDisqus.style.overflow = 'hidden';
+                    objDisqus.style.height = PRIVATE.iframeSize + 'px';
+
+                    var bottomArticle = document.querySelector(".bottom-elements-article");
+                    var fade = document.createElement('div');
+                    var button = document.createElement('button');
+
+                    fade.className = 'fade-comments';
+                    button.className = 'btn--default btn--small btn-social-comment';
+                    button.innerHTML = 'ver mais comentários';
+
+                    function removeButton(){
+                        objDisqus.style.height = 'auto';
+                        button.style.display = 'none';
+                        fade.style.display = 'none';
+                        objDisqus.removeEventListener('click', removeButton);
+                    }
+
+                    button.addEventListener('click', removeButton);
+                    bottomArticle.appendChild(fade);
+                    bottomArticle.appendChild(button);
+                };
+
+                window.addEventListener("message", PRIVATE.receiveMessage, false);
+
               
                 return PUBLIC;
 
