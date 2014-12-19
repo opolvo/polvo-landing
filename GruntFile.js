@@ -41,6 +41,6 @@ module.exports = function(grunt) {
 
     /* CI Tasks */
     grunt.registerTask('ci-build', ['build']);
-    grunt.registerTask('ci-validate', ['lint', 'test']);
+    grunt.registerTask('ci-validate', ['lint']);
 
 };
