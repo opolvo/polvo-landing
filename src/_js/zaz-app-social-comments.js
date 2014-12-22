@@ -113,7 +113,7 @@ zaz.use(function appSocialComments(pkg) {
                     objDisqus.style.overflow = 'hidden';
                     objDisqus.style.height = PRIVATE.iframeSize + 'px';
 
-                    var bottomArticle = document.querySelector(".bottom-elements-article");
+                    var socialComments = document.querySelector(".social-comments");
                     var fade = document.createElement('div');
                     var button = document.createElement('button');
 
@@ -129,8 +129,8 @@ zaz.use(function appSocialComments(pkg) {
                     }
 
                     button.addEventListener('click', removeButton);
-                    bottomArticle.appendChild(fade);
-                    bottomArticle.appendChild(button);
+                    socialComments.appendChild(fade);
+                    socialComments.appendChild(button);
                 };
 
                 window.addEventListener("message", PRIVATE.receiveMessage, false);
