@@ -1,7 +1,6 @@
 .social-comments {
     margin-bottom: 20px;
     float: left;
-    width: 100%;
 
     .fade-comments {
         background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 1%, rgba(255, 255, 255, 1) 100%);
@@ -21,20 +20,20 @@
     }
 
     .btn-social-comment:hover {
-        background-color: #606d75;    
+        background-color: #606d75;
     }
 
-    .container-disqus {        
+    .container-disqus {
         width: 620px;
         border-top: 2px solid #a5a598;
-        padding-top: 10px;        
+        padding-top: 10px;
 
         @if($zaz-mob==true) {
             width: 300px;
         }
     }
 
-    @include data-range(xlarge) {     
+    @include data-range(xlarge) {
         margin-left: zaz-rem(145);
     }
 }
