@@ -24,14 +24,15 @@
         background-color: #606d75;    
     }
 
-    .container-disqus {        
-        width: 620px;
-        border-top: 2px solid #a5a598;
-        padding-top: 10px;        
-
+    .container-disqus {
         @if($zaz-mob==true) {
             width: 300px;
+        } @else {
+            width: 620px;
         }
+
+        border-top: 2px solid #a5a598;
+        padding-top: 10px;        
     }
 
     @include data-range(xlarge) {     
