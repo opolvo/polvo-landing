@@ -57,7 +57,7 @@ zaz.use(function appSocialComments(pkg) {
 
                 var disqusUsers = {
                     'br' : 'terranetworks',
-                    'es' : 'terraes',
+                    'es' : 'terraesp',
                     'us' : 'terraus',
                     'mx' : 'terramx',
                     'ar' : 'terraar',
