@@ -70,6 +70,7 @@ zaz.use(function appSocialComments(pkg) {
 
                 if(shortName){
                     window['disqus_shortname'] = shortName; //jshint ignore:line
+                    window['disqus_url'] = [location.protocol, '//', location.host, location.pathname].join(''); //jshint ignore:line
                    
                     var dsq = document.createElement('script');
                     dsq.type = 'text/javascript';
