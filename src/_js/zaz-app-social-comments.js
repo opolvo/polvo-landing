@@ -43,9 +43,8 @@ zaz.use(function appSocialComments(pkg) {
             source: "http://github.tpn.terra.com/Terra/social-comments",
             description: "app para a utilizaçao da ferramenta disqus",
             tests: "http://s1.trrsf.com/fe/social-comments/tests/index.htm?zaz[env]=tests",
-            dependencies: [],
+            dependencies: ['dict.SocialComments'],
             dictionaries: [],
-            templates: {},
             expects: {},
             setup: function (__static, __proto, __shared) {},
             init: function (data, __shared) {
@@ -54,6 +53,7 @@ zaz.use(function appSocialComments(pkg) {
 
                 PRIVATE.iframeSize = 600;
                 PRIVATE.enableResize = true;
+                PUBLIC.dictSocialComments = new __shared.dependencies['dict.SocialComments']();
 
                 var disqusUsers = {
                     'br' : 'terranetworks',
@@ -120,7 +120,7 @@ zaz.use(function appSocialComments(pkg) {
 
                     fade.className = 'fade-comments';
                     button.className = 'btn--default btn--small btn-social-comment';
-                    button.innerHTML = 'ver mais comentários';
+                    button.innerHTML = PUBLIC.dictSocialComments.get("moreComments");
 
                     function removeButton(){
                         objDisqus.style.height = 'auto';
