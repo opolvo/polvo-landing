@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+	<head>
+		<title>Terra Networks Brasil S/A - Login 330x300</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+		<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script type="text/javascript">
+			var url = 'https://auth.terra.com.br/sso/disqus?act=logout';
+			var data = {'site':'br', 
+						'user':'-',
+						'pwd': '-' 
+			};
+
+			$.ajax({
+					url: url,
+					type: "POST",
+					dataType : 'json',
+					data: data,
+					xhrFields: {
+						withCredentials: true
+					},
+					complete : function() {
+						window.history.back()					
+					}
+				});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

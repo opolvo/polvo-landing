@@ -68,7 +68,6 @@ module.exports = {
                     "cwd": 'src/',
                     "src": ['**',
                           '!_js/zaz-app-social-comments.js',
-                          '!**/*.html',
                           '!_scss',
                           '!**/*.src.*',
                           '!temp/**',
