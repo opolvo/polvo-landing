@@ -143,11 +143,13 @@ body {
     left: 8px;
 }
 
-//#ddd_residencial.has-error,
-//#ddd_celular.has-error,
-//#ddd_contatos.has-error {
-//    background: none!important;
-//}
+/*
+#ddd_residencial.has-error,
+#ddd_celular.has-error,
+#ddd_contatos.has-error {
+    background: none!important;
+}
+*/
 
 .error-msg {
     color: #ff2209;
@@ -331,16 +333,20 @@ body {
     margin-top: 44px;
 }
 
-//.cart-wrap p#first {
-//    font-size: 40px;
-//    margin-left: -2px;
-//}
+/*
+.cart-wrap p#first {
+    font-size: 40px;
+    margin-left: -2px;
+}
+*/
 
-//.cart-wrap p#second {
-//    color: #65655d;
-//    margin-top: 11px;
-//    font-size: 20px;
-//}
+/*
+.cart-wrap p#second {
+    color: #65655d;
+    margin-top: 11px;
+    font-size: 20px;
+}
+*/
 
 .cart .product-title,
 .congratulations .cnt-cart-desc .product-name {
@@ -1644,11 +1650,12 @@ body,
     margin-left: 0;
 }
 
-
-//#recaptcha_reload,#recaptcha_switch_audio,#recaptcha_whatsthis,#recaptcha_switch_img,#recaptcha_area #recaptcha_table #recaptcha_reload_btn,#recaptcha_area #recaptcha_table #recaptcha_switch_audio_btn,#recaptcha_area #recaptcha_table #recaptcha_whatsthis_btn {
-//    display: block;
-//    background-color: #ff7212!important;
-//}
+/*
+#recaptcha_reload,#recaptcha_switch_audio,#recaptcha_whatsthis,#recaptcha_switch_img,#recaptcha_area #recaptcha_table #recaptcha_reload_btn,#recaptcha_area #recaptcha_table #recaptcha_switch_audio_btn,#recaptcha_area #recaptcha_table #recaptcha_whatsthis_btn {
+    display: block;
+    background-color: #ff7212!important;
+}
+*/
 
 
 .label-payment,
