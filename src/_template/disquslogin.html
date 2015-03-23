@@ -89,15 +89,17 @@
                 </div>
 
                 <div class="login-form-wrap">
-                    <input type="text" placeholder="usuário" class="input" id="user">
-                    <input type="password" placeholder="senha" class="input" id="pwd">
-                    <div class="forgot-password">
-                        <a href="https://central.terra.com.br/esqueci-minha-senha" id="link_esqueci" target="_BLANK">esqueci minha senha</a>
-                    </div>
-					<div id="login-generic-error" style="display: none;">Usuário ou senha incorretos.</div>
-                    <div class="buttons">
-                        <input type="button" value="entrar" id="submit" onclick="doLogin()">
-                    </div>
+                    <form id="frm" method="post" action="/">
+                        <input type="text" placeholder="usuário" class="input" id="user">
+                        <input type="password" placeholder="senha" class="input" id="pwd">
+                        <div class="forgot-password">
+                            <a href="https://central.terra.com.br/esqueci-minha-senha" id="link_esqueci" target="_BLANK">esqueci minha senha</a>
+                        </div>
+                        <div id="login-generic-error" style="display: none;">Usuário ou senha incorretos.</div>
+                        <div class="buttons">
+                            <input type="button" value="entrar" id="submit" onclick="doLogin()">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
