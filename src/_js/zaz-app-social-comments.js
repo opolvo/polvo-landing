@@ -135,10 +135,9 @@ zaz.use(function appSocialComments(pkg) {
                     if (event.origin === "http://disqus.com" || event.origin === "https://disqus.com") {
                         var objDisqus = JSON.parse(event.data);
 
-                        if (PRIVATE.enableResize && objDisqus.name === 'mainViewRendered' && objDisqus.data) {
-                            PRIVATE.enableResize = false;
-
+                        if (PRIVATE.enableResize && objDisqus.name === 'rendered' && objDisqus.data) {
                             if (objDisqus.data.height > PRIVATE.iframeSize) {
+                                PRIVATE.enableResize = false;
                                 PRIVATE.showButton();
                             }
                         } else if (objDisqus.name === 'posts.count' && objDisqus.data) {
@@ -188,7 +187,7 @@ zaz.use(function appSocialComments(pkg) {
 
                 window.addEventListener("message", PRIVATE.receiveMessage, false);
 
-              
+
                 return PUBLIC;
 
             },
