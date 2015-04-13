@@ -103,7 +103,8 @@ zaz.use(function appSocialComments(pkg) {
 
                 if(PRIVATE.shortName){
                     window['disqus_shortname'] = PRIVATE.shortName; //jshint ignore:line
-                    window['disqus_url'] = [location.protocol, '//', location.host, location.pathname].join(''); //jshint ignore:line
+                    window['disqus_url'] = pkg.context.page.get("canonical_url"); //jshint ignore:line
+                    // window['disqus_url'] = [location.protocol, '//', location.host, location.pathname].join(''); //jshint ignore:line
 
                     $.ajax({
                         url: disqusUrlAuthSSO,
