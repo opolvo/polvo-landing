@@ -51,7 +51,7 @@ zaz.use(function appSocialComments(pkg) {
                 var PUBLIC = this,
                     PRIVATE = {};
 
-                PRIVATE.iframeSize = 600;
+                PRIVATE.iframeSize = 350;
                 PRIVATE.enableResize = true;
                 PUBLIC.dictSocialComments = new __shared.dependencies['dict.SocialComments']();
 
