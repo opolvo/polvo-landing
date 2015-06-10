@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html>
 
 <head>
     <title>Terra Networks - Login</title>
@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <link type="text/css" rel="stylesheet" href="https://s1.trrsf.com/update-1420484107/fe/zaz-morph/_css/zaz.min.css" />
-    <link rel="stylesheet" type="text/css" href="http://s1.trrsf.com/fe/zaz-app-social-comments/_css/popup.css" />
+    <link rel="stylesheet" type="text/css" href="../_css/popup.css" />
 
     <style type="text/css">
         .header {
@@ -19,7 +19,7 @@
             text-align: center;
         }
         .logo {
-            background: url(http://s1.trrsf.com/update-1418664623/fe/zaz-navbar/_img/ico-terra.png) no-repeat 0 0;
+            background: url(https://s1.trrsf.com/update-1418664623/fe/zaz-navbar/_img/ico-terra.png) no-repeat 0 0;
             width: 129px;
             height: 36px;
             display: table-cell;
@@ -90,14 +90,14 @@
 
                 <div class="login-form-wrap">
                     <form id="frm" method="post" action="/" autocomplete="on">
-                        <input type="text" placeholder="usuário" class="input" id="user">
-                        <input type="password" placeholder="senha" class="input" id="pwd">
+                        <input type="text" placeholder="usuário" class="input" id="user" />
+                        <input type="password" placeholder="senha" class="input" id="pwd" />
                         <div class="forgot-password">
                             <a href="https://central.terra.com.br/esqueci-minha-senha" id="link_esqueci" target="_BLANK">esqueci minha senha</a>
                         </div>
                         <div id="login-generic-error" style="display: none;">Usuário ou senha incorretos.</div>
                         <div class="buttons">
-                            <input type="button" value="entrar" id="submit" onclick="doLogin()">
+                            <input type="button" value="entrar" id="submit" onclick="doLogin()" />
                         </div>
                     </form>
                 </div>
@@ -105,8 +105,7 @@
         </div>
 
         <div class="or">ou</div>
-        <div class="form-button" id="form-button"><a href="https://loja.terra.com.br/" id="link_cadastro" target="_blank">cadastre-se</a>
-        </div>
+        <div class="form-button" id="form-button"><a href="#" id="link_cadastro" target="_blank">cadastre-se</a></div>
     </div>
 
     <script type="text/javascript">
@@ -140,7 +139,9 @@
 					if (obj.status == 'success') {
 						msg = {
 							'token': obj.token,
-							'key': obj.key
+							'key': obj.key,
+                            'idPerm': obj.idPerm,
+                            'email': obj.email
 						};
 						window.opener.parent.postMessage(msg, '*');
 						window.close();
@@ -206,8 +207,8 @@
 				$('#login-generic-error').text('Usuario o contraseña incorrecta.');
 			}
 		}
-		
-		var site = urlParam('site');	
+
+		var site = urlParam('site');
 		traduzir();
 		setSubmit();
     </script>

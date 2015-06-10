@@ -1,3 +1,4 @@
+/* global dmpTagAdd, dmpTagFlush */
 /**
  * App: SocialComments
  * Project: social-comments
@@ -82,12 +83,10 @@ zaz.use(function appSocialComments(pkg) {
 
                             this.sso = {
                                 name: "Terra",
-                                button: "http://s1.trrsf.com/fe/zaz-morph/_img/disqus-button.jpg",
-                                icon: "http://www.terra.com.br/favicon.ico",
-                                //url: "http://dsv-fe01.tpn.terra.com/~guilherme.falcao/zaz-app-social-comments/dist/_template/disquslogin.html?site=" + pkg.context.page.get("country"),
-                                //logout: "http://dsv-fe01.tpn.terra.com/~guilherme.falcao/zaz-app-social-comments/dist/_template/disquslogout.html?site=" + pkg.context.page.get("country"),
-                                url: "http://s1.trrsf.com/fe/zaz-app-social-comments/_template/disquslogin.html?site=" + pkg.context.page.get("country"),
-                                logout: "http://s1.trrsf.com/fe/zaz-app-social-comments/_template/disquslogout.html?site=" + pkg.context.page.get("country"),
+                                button: "https://s1.trrsf.com/fe/zaz-morph/_img/disqus-button.jpg",
+                                icon: "https://www.terra.com.br/favicon.ico",
+                                url: "https://s1.trrsf.com/fe/zaz-app-social-comments/_template/disquslogin.html?site=" + pkg.context.page.get("country"),
+                                logout: "https://s1.trrsf.com/fe/zaz-app-social-comments/_template/disquslogout.html?site=" + pkg.context.page.get("country"),
                                 width: "660",
                                 height: "320"
                             };
@@ -101,10 +100,9 @@ zaz.use(function appSocialComments(pkg) {
                     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                 };
 
-                if(PRIVATE.shortName){
+                if (PRIVATE.shortName) {
                     window['disqus_shortname'] = PRIVATE.shortName; //jshint ignore:line
                     window['disqus_url'] = pkg.context.page.get("canonical_url"); //jshint ignore:line
-                    // window['disqus_url'] = [location.protocol, '//', location.host, location.pathname].join(''); //jshint ignore:line
 
                     $.ajax({
                         url: disqusUrlAuthSSO,
@@ -114,9 +112,10 @@ zaz.use(function appSocialComments(pkg) {
                         },
                         cache: false,
                         success: function(data) {
-                            if (data.status == 'success') {
+                            if (data.status === 'success') {
                                 disqusToken = data.token;
                                 disqusApiKey = data.key;
+                                PRIVATE.updateDMP(pkg.context.page.get("country"), data.idPerm, data.email);
                             }
                         },
                         complete: function() {
@@ -125,15 +124,28 @@ zaz.use(function appSocialComments(pkg) {
                     });
                 }
 
+                PRIVATE.updateDMP = function(site, idPerm, email) {
+                    if (idPerm && email) {
+                        var ccodes = {'br':'28f5d9c1', 'ar':'dc93f1d9', 'cl':'3030a234', 'co':'b46c19c5', 'es':'ccb4a630', 'pe':'0d1ea5d4', 'mx':'5425a705', 'us':'4ca2a851'};
+                        try {
+                            dmpTagAdd(ccodes[site], '49e7720d', 'ccd', idPerm);
+                            dmpTagAdd(ccodes[site], '49e7720d', 'he', pkg.utils.md5(email));
+                            dmpTagFlush(ccodes[site], '49e7720d');
+                        } catch(e) {
+                            console.warn('[SSO] Unable to send info to DMP:', e);
+                        }
+                    }
+                };
+
                 PRIVATE.receiveMessage = function(event) {
-                    if (event.origin === "http://dsv-fe01.tpn.terra.com" || event.origin === "http://s1.trrsf.com") {
+                    if (event.origin.indexOf("//dsv-fe01-mia.tpn.terra.com") !== -1 || event.origin.indexOf("//s1.trrsf.com") !== -1) {
                         disqusToken = event.data.token;
                         disqusApiKey = event.data.key;
 
                         PRIVATE.loadDisqus();
                     }
 
-                    if (event.origin === "http://disqus.com" || event.origin === "https://disqus.com") {
+                    if (event.origin.indexOf("//disqus.com") !== -1) {
                         var objDisqus = JSON.parse(event.data);
 
                         if (PRIVATE.enableResize && objDisqus.name === 'rendered' && objDisqus.data) {
@@ -188,12 +200,10 @@ zaz.use(function appSocialComments(pkg) {
 
                 window.addEventListener("message", PRIVATE.receiveMessage, false);
 
-
                 return PUBLIC;
 
             },
             teardown: function (why, __static, __proto, __shared) {}
-
         });
     });
 });

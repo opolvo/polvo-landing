@@ -1,6 +1,6 @@
 {
     "name": "zaz-app-social-comments",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "app para a utilizaçao da ferramenta disqus",
     "private": true,
     "npm_test": "grunt test",
