@@ -126,6 +126,12 @@ zaz.use(function appSocialComments(pkg) {
 
                 PRIVATE.updateDMP = function(site, idPerm, email) {
                     if (idPerm && email) {
+                        // Update Stalker
+                        pkg.require(['mod.stalker'], function(Stalker) {
+                            var s = new Stalker();
+                            s.setAttribute('accounts/terra/id', idPerm);
+                        });
+                        // Update LatinDMP
                         var ccodes = {'br':'28f5d9c1', 'ar':'dc93f1d9', 'cl':'3030a234', 'co':'b46c19c5', 'es':'ccb4a630', 'pe':'0d1ea5d4', 'mx':'5425a705', 'us':'4ca2a851'};
                         try {
                             dmpTagAdd(ccodes[site], '49e7720d', 'ccd', idPerm);
@@ -142,7 +148,7 @@ zaz.use(function appSocialComments(pkg) {
                     if (event.origin.indexOf("//dsv-fe01-mia.tpn.terra.com") !== -1 || event.origin.indexOf("//s1.trrsf.com") !== -1) {
                         disqusToken = event.data.token;
                         disqusApiKey = event.data.key;
-
+                        PRIVATE.updateDMP(pkg.context.page.get("country"), event.data.idPerm, event.data.email);
                         PRIVATE.loadDisqus();
                     }
 
