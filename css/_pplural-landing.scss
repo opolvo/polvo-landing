@@ -1,0 +1,114 @@
+@import url(https://fonts.googleapis.com/css?family=Dosis:400,200,700);
+
+//== Typography
+//
+//## Font, line-height, and color for body text, headings, and more.
+
+$font-family-sans-serif:		'Dosis', "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$polvo-font-family-base:		$font-family-sans-serif !default;
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `$screen-xs` as of v3.0.1
+$screen-xs:                  480px !default;
+//** Deprecated `$screen-xs-min` as of v3.2.0
+$screen-xs-min:              $screen-xs !default;
+//** Deprecated `$screen-phone` as of v3.0.1
+$screen-phone:               $screen-xs-min !default;
+
+// Small screen / tablet
+//** Deprecated `$screen-sm` as of v3.0.1
+$screen-sm:                  768px !default;
+$screen-sm-min:              $screen-sm !default;
+//** Deprecated `$screen-tablet` as of v3.0.1
+$screen-tablet:              $screen-sm-min !default;
+
+// Medium screen / desktop
+//** Deprecated `$screen-md` as of v3.0.1
+$screen-md:                  992px !default;
+$screen-md-min:              $screen-md !default;
+//** Deprecated `$screen-desktop` as of v3.0.1
+$screen-desktop:             $screen-md-min !default;
+
+// Large screen / wide desktop
+//** Deprecated `$screen-lg` as of v3.0.1
+$screen-lg:                  1200px !default;
+$screen-lg-min:              $screen-lg !default;
+//** Deprecated `$screen-lg-desktop` as of v3.0.1
+$screen-lg-desktop:          $screen-lg-min !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max:              ($screen-sm-min - 1) !default;
+$screen-sm-max:              ($screen-md-min - 1) !default;
+$screen-md-max:              ($screen-lg-min - 1) !default;
+// --------------------------------------------------
+
+
+//
+// Scaffolding
+// --------------------------------------------------
+
+body {
+	font-family: $polvo-font-family-base;
+	color: color('neutral', 'polvo');
+	background-color: color('neutral', 'white');
+}
+
+
+//
+// Navbar
+// --------------------------------------------------
+.navbar-pplural {
+	min-height: 80px;
+	
+	.navbar-brand {
+		font-size: 30px;
+		font-weight: 700;
+		line-height: 50px;
+		height: 80px;
+		
+		img {
+			width: 42px;
+			display: inline;
+		}
+	}
+	
+	.navbar-text {
+		margin-top: 30px;
+		margin-bottom: 30px;
+	}
+	
+	.navbar-collapse {
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+}
+
+@media (min-width: $screen-md-min) {
+	.affix {
+		min-height: 50px;
+	
+		.navbar-header .navbar-brand {
+			font-size: 18px;
+			line-height: 20px;
+			height: 50px;
+			
+			img {
+				width: 24px;
+			}
+		}
+		
+		.navbar-text {
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		
+		.navbar-collapse {
+			margin: 0;
+		}
+	}
+}
