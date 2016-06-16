@@ -2,7 +2,16 @@
 body {
   font-family: "Dosis", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: color("neutral", "polvo");
-  background-color: color("neutral", "white"); }
+  background-color: color("neutral", "white");
+  font-size: 28px;
+  font-weight: 300; }
+
+.branding {
+  font-size: 60px; }
+
+.lead {
+  font-size: 36px;
+  font-weight: 400; }
 
 .navbar-pplural {
   min-height: 80px; }
@@ -36,4 +45,4 @@ body {
     .affix .navbar-collapse {
       margin: 0; } }
 
-/*# sourceMappingURL=pplural-landing.css.map */
+/*# sourceMappingURL=polvo-landing.css.map */
