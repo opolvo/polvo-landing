@@ -56,6 +56,17 @@ body {
 	font-family: $polvo-font-family-base;
 	color: color('neutral', 'polvo');
 	background-color: color('neutral', 'white');
+	font-size: 28px;
+	font-weight: 300;
+}
+
+.branding {
+	font-size: 60px;
+}
+
+.lead {
+	font-size: 36px;
+	font-weight: 400;
 }
 
 
