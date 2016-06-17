@@ -56,8 +56,6 @@ body {
 	font-family: $polvo-font-family-base;
 	color: color('neutral', 'polvo');
 	background-color: color('neutral', 'white');
-	font-size: 28px;
-	font-weight: 300;
 }
 
 .branding {
@@ -69,6 +67,14 @@ body {
 	font-weight: 400;
 }
 
+.marketing {
+	font-size: 24px;
+	font-weight: 300;
+}
+
+.callout {
+	
+}
 
 //
 // Navbar
@@ -122,4 +128,12 @@ body {
 			margin: 0;
 		}
 	}
+}
+
+
+//
+//
+//
+.pull-up {
+	margin-top: -75px;
 }
