@@ -1,3 +1,3 @@
 # pplural-landing
 
-Landing page de apresentação do produto PPlural.
+Landing page de apresentação do produto Polvo.

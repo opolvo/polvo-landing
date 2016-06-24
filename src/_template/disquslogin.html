@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Terra Networks - Login</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://s1.trrsf.com/update-1420484107/fe/zaz-morph/_css/zaz.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_css/popup.css" />
+
+    <style type="text/css">
+        .header {
+            height: 60px;
+            background-color: #ff7212;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+        }
+        .logo {
+            background: url(https://s1.trrsf.com/update-1418664623/fe/zaz-navbar/_img/ico-terra.png) no-repeat 0 0;
+            width: 129px;
+            height: 36px;
+            display: table-cell;
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            margin-left: -64px;
+        }
+        .header img {
+            height: 22px;
+            position: absolute;
+            top: 20px;
+            left: 190px;
+        }
+        html:before {
+            content: ''
+        }
+        #link_cadastro {
+            color: white;
+            text-decoration: none;
+        }
+        .content {
+            width: auto;
+            padding: 0 10px;
+            margin: 0;
+        }
+		.forms-wrap {
+			margin-top:10px;
+			float:left;
+		}
+		.content.identify {
+			width:100%;
+			max-width:640px;
+		}
+
+		@media only screen and (max-device-width: 640px) {
+			.login-box {
+			}
+			.or {
+				width:300px;
+				margin-top:20px;
+				display:block;
+			}
+			.form-button {
+				clear:both;
+				float:left;
+				margin-top:15px;
+				margin-left: 80px;
+			}
+		}
+
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <a href="#" title="Terra Networks"><span class="logo"></span></a>
+    </div>
+
+    <div class="content identify">
+        <div class="forms-wrap">
+            <div class="login-box">
+                <div class="top">
+                    <p id="faca_login">
+                        Faça Login
+                    </p>
+                </div>
+
+                <div class="login-form-wrap">
+                    <form id="frm" method="post" action="/" autocomplete="on">
+                        <input type="text" placeholder="usuário" class="input" id="user" />
+                        <input type="password" placeholder="senha" class="input" id="pwd" />
+                        <div class="forgot-password">
+                            <a href="https://central.terra.com.br/esqueci-minha-senha" id="link_esqueci" target="_BLANK">esqueci minha senha</a>
+                        </div>
+                        <div id="login-generic-error" style="display: none;">Usuário ou senha incorretos.</div>
+                        <div class="buttons">
+                            <input type="button" value="entrar" id="submit" onclick="doLogin()" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="or">ou</div>
+        <div class="form-button" id="form-button"><a href="#" id="link_cadastro" target="_blank">cadastre-se</a></div>
+    </div>
+
+    <script type="text/javascript">
+        function urlParam(name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+            if (results == null) {
+                return 'br';
+            } else {
+                return results[1] || 0;
+            }
+        }
+
+		function doLogin() {
+            var urlAuth = 'https://auth.terra.com.br/sso/disqus';
+
+            var data = {
+                'site': site,
+                'user': $('#user').val(),
+                'pwd': $('#pwd').val(),
+            }
+
+            $.ajax({
+                url: urlAuth,
+                type: "POST",
+                dataType: 'json',
+                data: data,
+                xhrFields: {
+                    withCredentials: true
+                },
+                success: function(obj) {
+					if (obj.status == 'success') {
+						msg = {
+							'token': obj.token,
+							'key': obj.key,
+                            'idPerm': obj.idPerm,
+                            'email': obj.email
+						};
+						window.opener.parent.postMessage(msg, '*');
+						window.close();
+					}
+					else {
+						erroLogin();
+					}
+                
+				},
+				error:function() {
+					erroLogin();
+				}
+            });
+        }
+
+		function erroLogin() {
+			$('#login-generic-error').show();
+			$('#user, #pwd').addClass('has-error');
+		}
+
+		function setSubmit() {
+			$('.input').keypress(function (e) {
+			  if (e.which == 13) {
+				doLogin();
+				return false;
+			  }
+			});
+		}
+
+		function traduzir() {
+		    var cadastro = {
+		        'ar': 'http://registro.terra.com.ar/controller.php?action=2300&origin=cult',
+		        'br': 'https://vendasonline.terra.com.br/controller.php?action=5000&origin=cadastro-gratuito&packageList=PCTR00058849',
+		        'cl': 'http://registro.terra.cl/controller.php?action=2300&origin=cult_cl',
+		        'co': 'http://registro.terra.com.co/controller.php?action=2300&origin=cult_co',
+		        'es': 'http://nuevoregistro.terra.com/controller.php?action=2300&origin=cult_us_email',
+		        'mx': 'https://membresia.terra.com.mx/light_plus/registro.asp?Backurl=http://terramail.terra.com.mx/&Productoid=3',
+				'pe': 'http://correo-gratis.terra.com.pe/',
+		        'us': 'http://nuevoregistro.terra.com/controller.php?action=2300&origin=cult_us_email'
+		    };
+
+		    var esqueci = {
+		        'ar': 'http://central.terra.com.ar/centralrw.cgi?_wc=+8l4I8f8PWfT3OpD8EdRT8Ho0gvaejhkXpD5d8LTiNhuL27iro7KZTOYWfn88jPFwoqVMV_jLNOOEn3jc4bYqwdthNYT_ipBfKZMvI82XGITr9CQItBMJ8Cb0RP8qcyTbj',
+		        'br': 'https://central.terra.com.br/esqueci-minha-senha',
+		        'cl': 'https://central.terra.cl/centralrw.cgi?_wc=+22J42g22LgNtNRx2OGs52yq2DDcDdbe2pxb626878zyHs1cEoZITN9SQae72dJwaofXFJee3JcBNcWMsNlR4bEVR8daYeSq_cb3Bc4oZlCLX3M4C10TK2yqRhcJiC8wia',
+		        'co': 'http://www1.terra.com.co/SGUP/datos_ayuda.htm',
+		        'es': 'http://central.terra.com/centralrw.cgi?_wc=+0JJ70800d4Xr1mB0RF8L0JB8nYWEbIePiXD10407yrQ5ZwabhsgRL7QO6sy0b8wohiyEbcUuotIpf7Eb3zOmz3rcg6F85n7Bhau0BzoAoA6B125pGX950nGP5iN4AUnM2',
+		        'mx': 'https://membresia.terra.com.mx/light_plus/cuenta.asp?Backurl=http://email.terra.com.mx/&Productoid=3',
+				'pe': '#',
+		        'us': 'http://central.terra.com/centralrw.cgi?_wc=+U0YtUuUM64xqYvfFrUUBUjQM8B1VwuCMeVc*UY9Bg6YXOlvgdPF71s64RbrUwzlldgoKhI3dVNwBYz5*Qhr5v7quHvB6uoe28qJDK9pztUQppqyMWBV1U9B5eX9dnnHHs'
+		    };			
+
+			$('#link_cadastro').attr("href", cadastro[site]);
+			$('#link_esqueci').attr("href", esqueci[site]);
+
+			if (site != 'br') {
+				$('#link_cadastro').text('registro');
+				$('#link_esqueci').text('Olvidé mi contraseña');
+				$('#faca_login').text('acceder');
+				$('#submit').attr('value','acceder');
+				$('#user').attr('placeholder','usuario');
+				$('#pwd').attr('placeholder','contraseña');
+				$('#login-generic-error').text('Usuario o contraseña incorrecta.');
+			}
+		}
+
+		var site = urlParam('site');
+		traduzir();
+		setSubmit();
+    </script>
+</body>
+</html>

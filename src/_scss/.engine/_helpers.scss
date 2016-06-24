@@ -1,0 +1,270 @@
+//=======================================
+// Compatibility Functions and Fallbacks
+//=======================================
+
+// set this variable to TRUE if you want to compile
+// an IE8 only stylesheet
+
+$zaz-prefix : false;
+
+// remove unit for calculations
+@function zaz-remUnits($number) {
+    @return $number / ($number * 0 + 1);
+}
+
+// convert px-based values to rem in browsers that support it
+@function zaz-rem($value) {
+    @if $zaz-modern == false {
+        @return $value * 1px;
+    }
+    @if $zaz-modern == true {
+        @return ($value / zaz-remUnits($zaz__baseFont)) * 1rem;
+    }
+}
+
+//      Standalone
+//===============================
+
+@mixin make-standalone($standalone) {
+    @if $standalone == true {
+        .zaz--standalone {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}
+
+
+
+//      Transitions
+//===============================
+
+
+// You can use it with no parameters
+// but if you set a value to one, you must set to all
+// ::: Just remember: if you define one, you must define all :::
+@mixin transition($prop: all, $time: 200ms, $time-function: linear, $delay:null) {
+    @include generic-prefixes(transition, $prop $time $time-function $delay, ms webkit moz);
+}
+
+// Transform Mixin
+// Just fill the parameter with the transform value that you want
+@mixin transform($transform) {
+    @include generic-prefixes(transform, $transform, ms webkit moz);
+}
+
+//      Animations
+//===============================
+
+// Animation Mixin
+// remember to use in conjunction with the  Keyframes Mixin
+// Bind the animation to the selector where it's used
+@mixin animation($name, $duration) {
+    @include generic-prefixes(animation, $name $duration, ms webkit moz);
+}
+
+// Keyframes Mixin
+// remember to use in conjunction with the  Animation Mixin
+// Declare the Animation's name in the parameter and put the
+// keyframes - only once - between the brackets
+// keyframes will be printed in @content's place
+@mixin keyframes ($animation-name) {
+    @-webkit-keyframes $animation-name {
+        $zaz-prefix: webkit;
+        @content;
+    }
+    @-ms-keyframes $animation-name {
+        $zaz-prefix: ms;
+        @content;
+    }
+    @-moz-keyframes $animation-name {
+        $zaz-prefix: moz;
+        @content;
+    }
+    @keyframes $animation-name {
+        $zaz-prefix: false;
+        @content;
+    }
+}
+
+@mixin generic-prefixes($name, $prop, $arr) {
+    @if $zaz-prefix == false {
+        @each $prefix in $arr {
+            -#{$prefix}-#{$name}: $prop;
+        }
+    } @else {
+        -#{$zaz-prefix}-#{$name}: $prop;
+    }
+    #{$name}: $prop;
+}
+
+//      Accessories
+//===============================
+
+//-----------------------------------------\\
+// Accessory function to valing()
+// Do not use valig-IE8 nor valign-IE9
+@mixin valign-IE8 {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+// Center vertically elements in IE9
+@mixin valign-IE9($child) {
+    #{$child} {
+        position: relative;
+        top: 50%;
+        @include transform(translateY(-50%));
+    }
+}
+
+//-----------------------------------------\\
+
+// Apply to container and pass the element
+// that will be centered as the parameter $child
+@mixin valign($child) {
+    @if $zaz-modern == false {
+        @include valign-IE8;
+    }
+    @if $zaz-modern == true {
+        @include valign-IE9($child);
+    }
+    @else {
+        @warn 'variável $zaz-modern precisa ser TRUE ou FALSE';
+    }
+}
+
+
+// Clearfix Mixin
+// extend this mixin where you need a Clearfix.
+@mixin clearfix {
+    &:after {
+        content: '';
+        display: block;
+        clear: both;
+        visibility: hidden;
+        line-height: 0;
+        height: 0;
+    }
+}
+
+// Data-range mixin
+// include this mixin where you need to use a breakpoint
+// supports the ranges in ZAZ-Framework
+@mixin data-range($range) {
+    html[data-range=#{$range}] & {
+        @content;
+    }
+}
+
+// - - -
+// icons
+// - - -
+@function get-icon-coord($collection, $name) {
+    @each $icon in $collection {
+        $icon-name:  nth($icon, 1);
+        $icon-coord: nth($icon, 2);
+
+        @if $name == $icon-name {
+            @return $icon-coord;
+        }
+    }
+    @return 'Check your spelling for #{$name}. I couldn\'t find it';
+}
+
+@function get-path($collection, $scaler) {
+    // @each $path in $pngPaths {
+    //     $scale:  nth($path, 1);
+    //     $path: nth($path, 2);
+
+    //     @if $scaler == $scale {
+    //         @return $path;
+    //     }
+    // }
+
+    @if $scaler == 1/2 {
+        @return $pngPath05;
+    }
+
+    @if $scaler == 1 {
+        @return $pngPath1;
+    }
+
+    @if $scaler == 2 {
+        @return $pngPath2;
+    }
+
+    @return 'Check your spelling for #{$scaler}. I couldn\'t find it';
+}
+
+@function get-iconset($collection) {
+    @if ($collection == $mainset) {
+        @return 'mainset';
+    }
+
+    @if ($collection == $times-brasil) {
+        @return 'times-brasil';
+    }
+
+    @else {
+        @return 'no collection found!';
+    }
+}
+
+@mixin get-iconSizes($targetSet) {
+    @each $icons in $collections {
+        $set-name: nth($icons, 1) !global;
+        $set-baseSize: nth($icons, 2) !global;
+        $set-totalSize: nth($icons, 3) !global;
+
+        @if ($set-name == 'mainset' and $set == 'mainset') { //and $targetSet == $set-name {
+            $iconBaseSize: $set-baseSize !global;
+            $spriteBaseWidth: $set-totalSize !global;
+            //@debug $iconBaseSize;
+        } @else if ($set-name == 'times-brasil' and $set == 'times-brasil') { //and $targetSet == $set-name {
+            $iconBaseSize: $set-baseSize !global;
+            $spriteBaseWidth: $set-totalSize !global;
+        }
+    }
+}
+
+@mixin zaz-icon($collection, $iconname, $scale) {
+    $coordX: get-icon-coord($collection, $iconname);
+
+    $iconset: get-iconset($collection);
+    $svgPath:   'http://terra.zaz-icons.master.hlg-fe.tpn.terra.com/svg-sprites/#{$iconset}/zaz-#{$iconset}-sprite.svg';
+    $pngPaths:  'http://terra.zaz-icons.master.hlg-fe.tpn.terra.com/svg-sprites/#{$iconset}/zaz-#{$iconset}-fback1-sprite.png';
+    $pngPath05: 'http://terra.zaz-icons.master.hlg-fe.tpn.terra.com/svg-sprites/#{$iconset}/zaz-#{$iconset}-fback05-sprite.png';
+    $pngPath1:  'http://terra.zaz-icons.master.hlg-fe.tpn.terra.com/svg-sprites/#{$iconset}/zaz-#{$iconset}-fback1-sprite.png';
+    $pngPath2:  'http://terra.zaz-icons.master.hlg-fe.tpn.terra.com/svg-sprites/#{$iconset}/zaz-#{$iconset}-fback2-sprite.png';
+
+    // $spriteBaseWidth: $spriteBaseWidth-mainset;
+    // $iconBaseSize: $iconBaseSize-mainset;
+
+    @include get-iconSizes($iconset);
+
+
+    @if $zaz-modern == true {
+        background-image: url($svgPath);
+        width:  ($scale * $iconBaseSize) * 1px;
+        height: ($scale * $iconBaseSize) * 1px;
+        background-size: (($scale * $spriteBaseWidth) * 1px) auto;
+        background-position: (($scale * $coordX) * 1px) 0;
+
+    } @else {
+        @if $scale < 1 {
+            background-image: url($pngPath05);
+        } @else if $scale < 2 {
+            background-image: url($pngPath1);
+        } @else if $scale >= 2 {
+            background-image: url($pngPath2);
+        }
+
+        width:  ($scale * $iconBaseSize) * 1px;
+        height: ($scale * $iconBaseSize) * 1px;
+        background-size: (($scale * $spriteBaseWidth) * 1px) auto;
+        background-position: (($scale * $coordX) * 1px);
+        // background-image: url($pngPath);
+    }
+}
