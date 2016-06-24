@@ -1,0 +1,90 @@
+//===========================================\\
+//         Variáveis Terra ZAZ
+//===========================================\\
+//
+// Não alterar as variáveis deste bloco.
+// Caro queira consultá-las, visite:
+// http:// URL DA STYLGUIDE
+
+//-------------- main colors -----------------\\
+//============Don't change anything============\\
+
+// gray
+$zaz__grayDarkest:              #191917;
+$zaz__grayDarker:               #33332f;
+$zaz__grayDark:                 #65655d;
+$zaz__gray:                     #a5a598;
+$zaz__grayLight:                #d7d7d7;
+$zaz__grayLighter:              #f1f1f1;
+
+// orange
+$zaz__brandingDarkest:          #c3570f;
+$zaz__brandingDarker:           #de6311;
+$zaz__branding:                 #ff7212;
+$zaz__brandingLight:            #fd9417;
+$zaz__brandingLighter:          #fab61d;
+$zaz__brandingLightest:         #ffe4b4;
+
+// red
+$zaz__importantDarker:          #c11c05;
+$zaz__importantDark:            #d72007;
+$zaz__important:                #ff290b;
+
+// blue
+$zaz__socialDark:               #2b2ed0;
+$zaz__social:                   #245be7;
+$zaz__socialLight:              #2388dd;
+
+// green
+$zaz__notification:             #50bc37;
+$zaz__notificationLight:        #98d62d;
+$zaz__notificationLighter:      #c6ea28;
+
+// yellow
+$zaz__svaDark:                  #e3b204;
+$zaz__sva:                      #ffce1e;
+$zaz__svaLight:                 #f0ec08;
+
+// "green-blue"
+$zaz__sportsDark:               #006962;
+$zaz__sports:                   #00958c;
+$zaz__sportsLight:              #59b87e;
+
+// purple
+$zaz__fun:                      #b040a2;
+$zaz__funLight:                 #c471b7;
+
+
+//---------------------------------------------\\
+//--------------- text colors -----------------\\
+$zaz__bg:           $zaz__grayLight;
+
+$zaz__headline:     $zaz__grayDarkest;
+
+$zaz__txt:          $zaz__grayDarker;
+$zaz__txtSecond:    $zaz__grayDark;
+//---------------------------------------------\\
+
+//------------- spacing and text ---------------\\
+
+
+$zaz__baseFont:               10px !default;
+$zaz__spacing:                1em;
+$zaz__lineHeight:             1.2;
+
+//------------- font-family ---------------\\
+
+$zaz__ubuntu:                'Ubuntu';
+$zaz__opensans:              'OpenSans';
+
+$zaz__txtFont:           $zaz__opensans, sans-serif;
+$zaz__titleFont:         $zaz__ubuntu, #{$zaz__txtFont};
+
+//-----------------------------------------\\
+
+$mq-breakpoints: ((mobile  320px)
+                 (tablet  768px)
+                 (desk    1024px)
+                (wide    1280px)
+                // tweakpoints go below
+);

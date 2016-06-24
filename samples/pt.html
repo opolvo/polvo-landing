@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8">
+        <title>Sample Document</title>
+
+        <link rel="stylesheet" href="http://s1.trrsf.com/fe/zaz-morph/_css/zaz.css" />
+        <link rel="stylesheet" href="../dist/_css/theme-default.css" />
+    </head>
+
+    <body>
+
+        <h1>zaz-app-social-comments sample</h1>
+
+        <div id="container" class="social-comments" style="white-space: pre; font-family: monospace;"></div>
+
+        <script src="http://s1.trrsf.com/fe/zaz-cerebro/prd/scripts/zaz.inline.min.js"></script>
+        <script src="../dist/_js/zaz-app-social-comments.js"></script>
+        <script type="text/javascript">
+            var disqus_shortname = 'terranetworks'; // Required - Replace example with your forum shortname
+            //var disqus_identifier = 'a unique identifier for each page where Disqus is present';
+            //var disqus_title = 'a unique title for each page where Disqus is present';
+            //var disqus_url = 'a unique URL for each page where Disqus is present';
+        </script>
+        <script type="text/javascript">
+
+            zaz.use(function (pkg) {
+
+                'use strict';
+
+                pkg.require(['app.socialComments'], function (SocialComments) {
+
+                    // EXAMPLE
+                    // READ and DELETE the following lines of code
+                                                                 
+                    var str= "",
+                        inst= new SocialComments({
+                            someProp: "someValue"
+                        });
+
+                    str+= 'Public Static     : '+ SocialComments.staticData + "<br/>";
+                    str+= "Instance's public : "+ inst.get('someProp') + "<br/>";
+                    str+= "Proto's inherited : " + inst.someData + "<br/><br/>";
+                    str+= SocialComments.help();
+
+                    inst.on('foo', function(newValue){
+                        console.info('foo changed to ', newValue);
+                    });
+
+                    inst.set('foo', 'bar');
+
+                    document.getElementById('container').innerHTML = str;
+                    
+                    // END OF EXAMPLE
+
+                });
+
+            });
+
+        </script>
+
+         <div id="disqus_thread"></div>
+    </body>
+
+</html>
